@@ -66,6 +66,12 @@ TARGET_KERNEL_SOURCE := kernel/leeco/x3
 TARGET_KERNEL_CONFIG := x500_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+
+#copy prebuilt kernel to its place
+ifeq ($(TARGET_PRODUCT),aosp_x3)
+PRODUCT_COPY_FILES += $(TARGET_PREBUILT_KERNEL):kernel
+endif
 
 # build old-style zip files (required for ota updater)
 BLOCK_BASED_OTA := false
