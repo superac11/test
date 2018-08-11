@@ -1,4 +1,3 @@
-
 LOCAL_PATH:= $(call my-dir)
 
 ifeq ($(BOARD_MEDIATEK_USES_GPS),true)
@@ -13,6 +12,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, src)
 LOCAL_PACKAGE_NAME := YGPS
 LOCAL_CERTIFICATE := platform
 LOCAL_PROGUARD_ENABLED := disabled
+LOCAL_SDK_VERSION := 14
 
 include $(BUILD_PACKAGE)
 
