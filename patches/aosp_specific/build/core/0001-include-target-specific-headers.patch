@@ -1,0 +1,49 @@
+From 51e7da3e201a0026ab59ab27881bbe893fc2801a Mon Sep 17 00:00:00 2001
+From: vishalk17 <vishalkapadi95@gmail.com>
+Date: Sat, 11 Aug 2018 08:34:08 +0000
+Subject: [PATCH] include target specific headers
+
+Change-Id: I6c47ca3b288b896e560c6a5f43157b2e03008a71
+---
+ core/binary.mk       | 7 ++++++-
+ core/soong_config.mk | 2 ++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/core/binary.mk b/core/binary.mk
+index 954df1f..6881fd1 100644
+--- a/core/binary.mk
++++ b/core/binary.mk
+@@ -1475,6 +1475,11 @@ my_tracked_gen_files :=
+ $(foreach f,$(my_tracked_src_files),$(eval my_src_file_obj_$(s):=))
+ my_tracked_src_files :=
+ 
++## Allow a device's own headers to take precedence over global ones
++ifneq ($(TARGET_SPECIFIC_HEADER_PATH),)
++my_c_includes := $(TOPDIR)$(TARGET_SPECIFIC_HEADER_PATH) $(my_c_includes)
++endif
++
+ my_c_includes += $(TOPDIR)$(LOCAL_PATH) $(intermediates) $(generated_sources_dir)
+ 
+ # The platform JNI header is for platform modules only.
+@@ -1875,4 +1880,4 @@ my_gcno_objects := \
+ 
+ LOCAL_GCNO_FILES := $(patsubst %.o,%.gcno,$(my_gcno_objects))
+ $(foreach f,$(my_gcno_objects),$(eval $(call gcno-touch-rule,$(f),$(f:.o=.gcno))))
+-endif
++endif
+\ No newline at end of file
+diff --git a/core/soong_config.mk b/core/soong_config.mk
+index f8cb2fb..a5abbf5 100644
+--- a/core/soong_config.mk
++++ b/core/soong_config.mk
+@@ -143,6 +143,8 @@ $(call add_json_list, NamespacesToExport,                $(PRODUCT_SOONG_NAMESPA
+ 
+ $(call add_json_list, PgoAdditionalProfileDirs,          $(PGO_ADDITIONAL_PROFILE_DIRS))
+ 
++$(call add_json_str, TargetHeaderPath,                   $(TARGET_SPECIFIC_HEADER_PATH))
++
+ _contents := $(_contents)    "VendorVars": {$(newline)
+ $(foreach namespace,$(SOONG_CONFIG_NAMESPACES),\
+   $(eval _contents := $$(_contents)        "$(namespace)": {$$(newline)) \
+-- 
+2.7.4
