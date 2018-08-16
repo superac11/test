@@ -320,7 +320,7 @@ PRODUCT_COPY_FILES += \
 
 # HIDL Manifest
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/manifest.xml:system/vendor/manifest.xml
+   $(DEVICE_PATH)/configs/manifest.xml:system/vendor/manifest.xml
 
 # Bluetooth
 PRODUCT_PACKAGES += \
