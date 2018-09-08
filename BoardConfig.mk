@@ -66,6 +66,9 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 # build old-style zip files (required for ota updater)
 BLOCK_BASED_OTA := false
 
+# Initial API Level of the Device
+PRODUCT_SHIPPING_API_LEVEL := 23
+
 # Disable memcpy opt (for audio libraries)
 TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
