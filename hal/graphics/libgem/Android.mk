@@ -56,46 +56,4 @@ include $(BUILD_SHARED_LIBRARY)
 
 ######################################################################
 
-#
-# libgui_ext.so
-#
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := libgui_ext
-LOCAL_MODULE_TAGS := optional
-
-
-#ifeq ($(MTK_MIRAVISION_SUPPORT),yes)
-LOCAL_CFLAGS += -DCONFIG_FOR_SOURCE_PQ
-#endif
-
-LOCAL_SRC_FILES := \
-	lib/IGuiExtService.cpp \
-	lib/GuiExtService.cpp \
-	lib/GuiExtClient.cpp \
-	lib/GuiExtClientProducer.cpp \
-	lib/GuiExtClientConsumer.cpp \
-	lib/GuiExtImpl.cpp
-
-LOCAL_C_INCLUDES := \
-		$(LOCAL_PATH)/inc \
-
-LOCAL_SHARED_LIBRARIES := \
-	libutils \
-	libcutils \
-	libbinder \
-	libhardware \
-	libhardware_legacy \
-	libgui \
-	liblog \
-	libui \
-	libdl \
-	libion \
-	libion_mtk \
-	libgralloc_extra \
-	libui_ext
-
-LOCAL_PROPRIETARY_MODULE := true
-include $(BUILD_SHARED_LIBRARY)
-
 include $(call all-makefiles-under,$(LOCAL_PATH))
