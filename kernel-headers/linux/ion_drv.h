@@ -44,6 +44,10 @@ typedef enum {
 	ION_ERROR_CONFIG_LOCKED = 0x10000
 } ION_ERROR_E;
 
+/* mm or mm_sec heap flag which is do not conflist with ION_HEAP_FLAG_DEFER_FREE */
+#define ION_FLAG_MM_HEAP_INIT_ZERO (1 << 16)
+#define ION_FLAG_MM_HEAP_SEC_PA (1 << 18)
+
 typedef struct ion_sys_cache_sync_param {
 	union {
 		ion_user_handle_t handle;
